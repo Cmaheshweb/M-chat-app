@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Chat App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to M-Chat</h1>
+    <div class="chat-container">
+        <input type="text" id="message" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+        <img id="avatar" src="images/female-avatar.png" alt="Avatar" width="50">
+    </div>
+    <div class="avatar-selection">
+        <button onclick="selectAvatar('female')">
+            <img src="images/female-avatar.png" alt="Female Avatar" width="50"> Female Avatar
+        </button>
+        <button onclick="selectAvatar('male')">
+            <img src="images/male-avatar.png" alt="Male Avatar" width="50"> Male Avatar
+        </button>
+    </div>
+    <div class="voice-section">
+        <button onclick="startRecognition()">🎤 Voice</button>
+    </div>
+    <script src="app.js"></script>
+    <script src="voice.js"></script>
+</body>
+</html>

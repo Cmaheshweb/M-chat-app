@@ -1,0 +1,15 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+.chat-container {
+    margin: 20px;
+}
+.avatar-selection button {
+    margin: 10px;
+}
+.voice-section {
+    margin-top: 20px;
+}
