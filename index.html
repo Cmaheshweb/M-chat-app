@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>M-Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to M-Chat</h1>
+    
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
 
+    <div class="avatar-section">
+      <span>👤 Avatar:</span>
+      <img src="female-avatar.png" alt="Female Avatar" width="60" />
+      <img src="male-avatar.png" alt="Male Avatar" width="60" />
+    </div>
+
+    <div class="voice-section">
+      <button onclick="startVoiceInput()">🎤 Voice</button>
+    </div>
+
+    <div id="chatOutput"></div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="voice.js"></script>
+</body>
+</html>
