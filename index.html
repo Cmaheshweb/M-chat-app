@@ -7,26 +7,26 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>Welcome to M-Chat</h1>
+    
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
 
-  <h1>Welcome to M-Chat</h1>
+    <div class="avatar-section">
+      <span>👤 Avatar:</span>
+      <img src="female-avatar.png" alt="Female Avatar" width="60" />
+      <img src="male-avatar.png" alt="Male Avatar" width="60" />
+    </div>
 
-  <input type="text" id="userInput" placeholder="Type your message..." />
-  <button onclick="sendMessage()">Send</button>
-  <span>🧑‍💻 Avatar</span>
+    <div class="voice-section">
+      <button onclick="startVoiceInput()">🎤 Voice</button>
+    </div>
 
-  <br /><br />
-
-  <button onclick="selectAvatar('female')">
-    <img src="female-avatar.png" alt="Female Avatar" width="100" />
-  </button>
-
-  <button onclick="selectAvatar('male')">
-    <img src="male-avatar.png" alt="Male Avatar" width="100" />
-  </button>
-
-  <br /><br />
-
-  <button onclick="startVoice()">🎙️ Voice</button>
+    <div id="chatOutput"></div>
+  </div>
 
   <script src="app.js"></script>
   <script src="voice.js"></script>
