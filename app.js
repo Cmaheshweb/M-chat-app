@@ -1,20 +1,12 @@
-
-let avatarPath = 'images/female-avatar.png';
+let selectedAvatar = '';
 
 function selectAvatar(type) {
-    avatarPath = type === 'male' ? 'images/male-avatar.png' : 'images/female-avatar.png';
-    document.getElementById('avatar').src = avatarPath;
-    localStorage.setItem('selectedAvatar', avatarPath);
-}
+  selectedAvatar = type;
+  document.querySelectorAll('.avatar-selector img').forEach(img => {
+    img.classList.remove('selected');
+  });
+  document.getElementById(`${type}-avatar`).classList.add('selected');
 
-function sendMessage() {
-    const msg = document.getElementById('message').value;
-    alert("You said: " + msg);
-}
-
-window.onload = () => {
-    const savedAvatar = localStorage.getItem('selectedAvatar');
-    if (savedAvatar) {
-        document.getElementById('avatar').src = savedAvatar;
-    }
+  const avatarDisplay = document.getElementById('avatar-display');
+  avatarDisplay.innerHTML = `<img src="${type}-avatar.png" alt="${type} avatar">`;
 }
