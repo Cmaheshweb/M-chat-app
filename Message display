@@ -1,0 +1,18 @@
+<div id="chatBox"></div>
+<input type="text" id="userInput">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+function sendMessage() {
+  const msg = document.getElementById("userInput").value;
+  const chatBox = document.getElementById("chatBox");
+
+  chatBox.innerHTML += `<div><strong>तू:</strong> ${msg}</div>`;
+  document.getElementById("userInput").value = "";
+
+  // Dummy bot reply
+  setTimeout(() => {
+    chatBox.innerHTML += `<div><strong>M-Chat:</strong> छान बोललास!</div>`;
+  }, 1000);
+}
+</script>
