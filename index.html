@@ -1,34 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>M-Chat</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>M-Chat: बोलणारी मैत्री</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #673ab7;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .chatbox {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      background: white;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .input-area {
+      display: flex;
+      gap: 0.5rem;
+    }
+    input {
+      flex: 1;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 0.75rem 1rem;
+      background-color: #673ab7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .message {
+      margin: 0.5rem 0;
+    }
+    .user {
+      text-align: right;
+      color: #3f51b5;
+    }
+    .bot {
+      text-align: left;
+      color: #009688;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to M-Chat</h1>
-    
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type your message..." />
-      <button onclick="sendMessage()">Send</button>
+  <header>M-Chat: बोलणारी मैत्री</header>
+  <main>
+    <div class="chatbox" id="chatbox">
+      <div class="message bot">नमस्कार! मी तुमची मैत्रीण, वृषू. काय बोलायचं आहे?</div>
     </div>
-
-    <div class="avatar-section">
-      <span>👤 Avatar:</span>
-      <img src="female-avatar.png" alt="Female Avatar" width="60" />
-      <img src="male-avatar.png" alt="Male Avatar" width="60" />
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="तुमचं प्रश्न लिहा..." />
+      <button onclick="sendMessage()">पाठवा</button>
     </div>
+  </main>
 
-    <div class="voice-section">
-      <button onclick="startVoiceInput()">🎤 Voice</button>
-    </div>
+  <script>
+    const chatbox = document.getElementById("chatbox");
 
-    <div id="chatOutput"></div>
-  </div>
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (!text) return;
 
-  <script src="app.js"></script>
-  <script src="voice.js"></script>
+      appendMessage("user", text);
+      input.value = "";
+
+      const reply = await getReply(text);
+      appendMessage("bot", reply);
+    }
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.className = "message " + sender;
+      msg.innerText = text;
+      chatbox.appendChild(msg);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    async function getReply(msg) {
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer sk-proj-तुझी_API_KEY_इथे"
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: msg }],
+          }),
+        });
+        const data = await response.json();
+        return data.choices[0].message.content;
+      } catch (e) {
+        return "माफ करा, काहीतरी चूक झाली.";
+      }
+    }
+  </script>
 </body>
 </html>
